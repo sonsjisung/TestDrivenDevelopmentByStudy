@@ -5,33 +5,25 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Test;
 
-import main.money.Dollar;
-import main.money.Franc;
 import main.money.Money;
 
+
 public class MoneyTest {
+    @Test
+    public void testMultiplication() {
+        Money five = Money.dollar(5);
+        assertEquals(Money.dollar(10), five.times(2));
+        assertEquals(Money.dollar(15), five.times(3));
 
-	@Test
-	public void testMultiplication() {
-		Dollar five = Money.dollar(5);
-		assertThat(Money.dollar(10), is(five.times(2)));
-		assertThat(Money.dollar(15), is(five.times(3)));
-	}
+        Money ten = Money.dollar(10);
+        assertEquals(Money.dollar(30), ten.times(3));
+    }
 	
 	@Test
-	public void testFrancMultiplication() {
-		Franc five = Money.franc(5);
-		assertThat(Money.franc(10), is(five.times(2)));
-		assertThat(Money.franc(15), is(five.times(3)));
+	public void testDifferentClassEquality(){
+		assertTrue(Money.dollar(5).equals(Money.dollar(5)));
+        assertFalse(Money.dollar(5).equals(Money.dollar(6)));
+        assertFalse(Money.dollar(5).equals(Money.franc(5)));
+		//assertThat("CHF", is(Money.franc(1).currency()) );
 	}
-	
-	@Test
-	public void testEquality(){
-		assertThat(Money.dollar(5), is(Money.dollar(5)));
-		assertThat(Money.dollar(6), is(Money.dollar(6)));
-		assertThat(Money.franc(5), is(Money.franc(5)));
-		assertThat(Money.franc(6), is(Money.franc(6)));
-		assertFalse( Money.franc(6).equals(Money.dollar(6)) );
-	}
-
 }
